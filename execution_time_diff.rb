@@ -16,5 +16,18 @@ def my_min_phase_2(arr)
     min
 end
 
-# list = [ 0, 3, 5, 4, -5, 10, 1, 90 ]
-# puts my_min_phase_2(list)  # =>  -5
+def contiguous_sub_sum_phase_1(arr)
+    subs = []
+    (0...arr.length).each do |start_idx|
+        (start_idx...arr.length).each do |end_idx|
+            subs << arr[start_idx..end_idx]
+        end
+    end
+
+    subs
+end
+
+list = [5, 3, -7]
+print contiguous_sub_sum_phase_1(list)
+
+
