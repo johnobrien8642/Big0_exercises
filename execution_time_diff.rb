@@ -24,10 +24,12 @@ def contiguous_sub_sum_phase_1(arr)
         end
     end
 
-    subs
+    subs.map { |sub| sub.inject(:+) }.max
 end
 
-list = [5, 3, -7]
-print contiguous_sub_sum_phase_1(list)
+list = [5, 3, -7] #=> 8
+list2 = [2, 3, -6, 7, -6, 7] #=> 8
+list3 = [-5, -1, -3] #=> -1
+puts contiguous_sub_sum_phase_1(list3)
 
 
