@@ -27,21 +27,37 @@ def contiguous_sub_sum_phase_1(arr)
     subs.map { |sub| sub.inject(:+) }.max
 end
 
-def contiguous_sub_sum_phase_2(arr)
-    largest_sum = -100
+# This is still O(n^3), asked stackoverflow and had this clarified
+# def largest_contiguous_sub_sum(arr)
+#     largest_sum = -100
 
-    (0...arr.length).each do |start_idx|
-        (start_idx...arr.length).each do |end_idx|
-            current_sum = arr[start_idx..end_idx].sum
-            largest_sum = current_sum if largest_sum < current_sum
-        end
-    end
-    largest_sum
+#     (0...arr.length).each do |start_idx|
+#         (start_idx...arr.length).each do |end_idx|
+#             current_sum = arr[start_idx..end_idx].sum
+#             largest_sum = current_sum if largest_sum < current_sum
+#         end
+#     end
+#     largest_sum
+# end
+
+# This is O(n) linear time, O(1) space
+# taken from the course solutions. 
+def largest_contiguous_subsum2(arr)
+  largest = arr.first
+  current = arr.first
+  debugger
+  (1...arr.length).each do |i|
+    current = 0 if current < 0
+    current += arr[i]
+    largest = current if current > largest
+  end
+
+  largest
 end
 
 list = [5, 3, -7] #=> 8
 list2 = [2, 3, -6, 7, -6, 7] #=> 8
 list3 = [-5, -1, -3] #=> -1
-puts contiguous_sub_sum_phase_2(list2)
+puts largest_contiguous_subsum2(list2)
 
 
