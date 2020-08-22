@@ -100,12 +100,22 @@ end
 
 
 
-puts fourth_anagram?("dog", "god")        #=> true
-puts fourth_anagram?("gizmo", "sally")    #=> false
-puts fourth_anagram?("elvis", "lives")    #=> true
+def bad_two_sum?(arr, target_sum)
+    all_pairs = []
+    arr.each_with_index do |el1, idx1|
+      arr.each_with_index do |el2, idx2|
+        if idx2 > idx1
+          all_pairs << [ el1, el2 ]
+        end
+      end
+    end
 
+    all_pairs.any? { |pair| pair.sum == target_sum }
+end
 
-
+arr = [0, 1, 5, 7]
+puts bad_two_sum?(arr, 6) # => should be true
+puts bad_two_sum?(arr, 10) # => should be false
 
 
 
