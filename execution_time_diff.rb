@@ -55,9 +55,57 @@ def largest_contiguous_subsum2(arr)
   largest
 end
 
-list = [5, 3, -7] #=> 8
-list2 = [2, 3, -6, 7, -6, 7] #=> 8
-list3 = [-5, -1, -3] #=> -1
-puts largest_contiguous_subsum2(list2)
+# Anagrams
+
+def first_anagram?(word1, word2)
+    word1_arr = word1.split('')
+    pos_anagrams = word1_arr.permutation.to_a
+    
+    pos_anagrams.each do |subArray| 
+        if subArray.join('') == word2
+            return true
+        end
+    end
+    false
+end
+
+def second_anagram?(string1, string2)
+    word2 = string2.split('')
+    
+    (0...string1.length).each do |i|
+        char_to_check = string1[i]
+        word2.delete_at(word2.index(char_to_check)) if word2.include?(char_to_check)
+    end
+
+    return true if word2.empty?
+    false
+end
+
+def third_anagram?(word1, word2)
+    arr1, arr2 = word1.split(''), word2.split('')
+
+    return true if arr1.sort == arr2.sort
+    false
+end
+
+def fourth_anagram?(word1, word2)
+    char_count = Hash.new(0)
+
+    word1.each_char { |char| char_count[char] += 1 }
+    word2.each_char { |char| char_count[char] -= 1 }
+
+    char_count.values.all? { |val| val == 0 }
+end
+
+
+
+
+puts fourth_anagram?("dog", "god")        #=> true
+puts fourth_anagram?("gizmo", "sally")    #=> false
+puts fourth_anagram?("elvis", "lives")    #=> true
+
+
+
+
 
 
