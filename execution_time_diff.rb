@@ -99,7 +99,8 @@ end
 
 
 
-
+# O(n^3) cubic time?
+# O(n^2) quadratic space?
 def bad_two_sum?(arr, target_sum)
     all_pairs = []
     arr.each_with_index do |el1, idx1|
@@ -113,9 +114,42 @@ def bad_two_sum?(arr, target_sum)
     all_pairs.any? { |pair| pair.sum == target_sum }
 end
 
-arr = [0, 1, 5, 7]
-puts bad_two_sum?(arr, 6) # => should be true
-puts bad_two_sum?(arr, 10) # => should be false
+
+def okay_two_sum_a?(arr, target_sum)
+  sorted_arr = arr.sort
+  i, j = 0, arr.length - 1
+
+  while i < j
+    case (arr[i] + arr[j]) <=> target_sum
+    when 0
+        return true
+    when -1 
+        i += 1
+    when 1
+        j -= 1
+    end 
+  end
+  false
+end
+
+#O(n) linear time
+#O(n) linear space
+def two_sum?(arr, target_sum)
+  debugger
+  complements = {}
+
+  arr.each do |el|
+    return true if complements[target_sum - el]
+    complements[el] = true
+  end
+
+  false
+end
+
+
+arr = [0, 3, 5, 7]
+# puts two_sum?(arr, 6) # => should be true
+puts two_sum?(arr, 10) # => should be false
 
 
 
