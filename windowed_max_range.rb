@@ -11,6 +11,32 @@ def windowed_max_range(arr, win)
     best_max
 end
 
+class MyQueue 
+  def initialize
+    @store = []
+  end
+
+  def peek
+    @store.first
+  end
+
+  def size
+    @store.size
+  end
+
+  def empty?
+    @store.empty?
+  end
+
+  def enqueue(el)
+    @store.push(el)
+  end
+
+  def dequeue(el)
+    @store.unshift(el)
+  end
+end
+
 
 
 
