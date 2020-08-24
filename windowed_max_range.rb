@@ -2,7 +2,7 @@ require 'byebug'
 
 def windowed_max_range(arr, win)
     best_max = nil
-    debugger
+    # debugger
     (0...arr.length - 1).each do |i|
         curr_win = arr[i...i + win]
         curr_max = curr_win.max - curr_win.min
@@ -63,10 +63,41 @@ class MyStack
   end
 end
 
+class StackQueue
+  def initialize
+    @in_stack = MyStack.new
+    @out_stack = MyStack.new
+  end
+
+  def size 
+    @in_stack.size + @out_stack.size
+  end
+
+  def empty?
+    @in_stack.empty? && @out_stack.empty?
+  end
+
+  def enqueue(el)
+    @in_stack.push(el)
+  end
+
+  def dequeue
+    queueify if out_stack.empty
+
+    @out_stack.push
+  end
+
+  private
+
+  def queueify
+    @out_stack.push(in_stack.pop) until in_stack.empty?
+  end
+end
 
 
 
-puts windowed_max_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8
-puts windowed_max_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
-puts windowed_max_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8
-puts windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8
+
+# puts windowed_max_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8
+# puts windowed_max_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
+# puts windowed_max_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8
+# puts windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8
