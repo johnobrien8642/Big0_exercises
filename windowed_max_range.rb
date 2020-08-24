@@ -12,12 +12,12 @@ def windowed_max_range(arr, win)
 end
 
 class MyQueue 
-  def initialize
-    @store = []
+  def initialize(store = [])
+    @store = store
   end
 
   def peek
-    @store.first
+    @store.last
   end
 
   def size
@@ -32,8 +32,34 @@ class MyQueue
     @store.push(el)
   end
 
-  def dequeue(el)
-    @store.unshift(el)
+  def dequeue
+    @store.shift
+  end
+end
+
+class MyStack
+  def initialize
+    @store = []
+  end
+
+  def peek
+    @store.last
+  end
+
+  def size
+    @store.size
+  end
+
+  def empty?
+    @store.empty?
+  end
+
+  def push(el)
+    @store.push(el)
+  end
+
+  def pop(el)
+    @store.pop(el)
   end
 end
 
